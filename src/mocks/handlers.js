@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { context, rest } from 'msw';
 
 export const handlers = [
     rest.get('http://localhost:5000/products', (req, res, context) => {
@@ -26,5 +26,9 @@ export const handlers = [
                 }
             ])
         );
+    }),
+    rest.post('http://localhost:5000/order', (req, res, context) => {
+        let dummyData = [{ orderNumber: 123455676, price: 2000 }];
+        return res(context.json(dummyData));
     })
 ];
